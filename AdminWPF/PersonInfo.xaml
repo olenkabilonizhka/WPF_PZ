@@ -1,0 +1,135 @@
+﻿<Window x:Class="AdminWPF.PersonInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminWPF"
+        mc:Ignorable="d"
+        Title="PersonInfo" 
+        Height="270" Width="350"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel>
+            <Button x:Name="CloseButton" 
+                    Style="{StaticResource exitButton}" 
+                    Content="Close" 
+                    HorizontalAlignment="Right"
+                    Margin="0,0,3,5"
+                    Command="{Binding closeCommand}"/>
+            <DockPanel Margin="5" Height="20">
+                <Label x:Name="PersonidLabel" 
+                       Content="PersonId" 
+                       FontSize="12" 
+                       Margin="15,0,27,0" 
+                       Padding="0"  
+                       VerticalAlignment="Center"/>
+                <TextBox x:Name="PersonIdTextBox"
+                         IsReadOnly="True"
+                         Text="{Binding PersonV.PersonId}"/>
+            </DockPanel>
+            <DockPanel Margin="5" Height="20">
+                <Label x:Name="FirstNameLabel" 
+                       Content="FirstName" 
+                       FontSize="12" 
+                       Margin="15,0,19,0"
+                       Padding="0"
+                       VerticalAlignment="Center"/>
+                <TextBox x:Name="FirstNameTextBox" 
+                         Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                         Style="{StaticResource textBoxError}">
+                    <TextBox.Text>
+                        <Binding Path="PersonV.Firstname"
+                                 UpdateSourceTrigger="PropertyChanged" 
+                                 ValidatesOnDataErrors="True" 
+                                 ValidatesOnExceptions="True"/>
+                    </TextBox.Text>
+                </TextBox>
+            </DockPanel>
+            <DockPanel Margin="5" Height="20">
+                <Label x:Name="LastNameLabel" 
+                       Content="LastName" 
+                       FontSize="12" 
+                       Margin="15,0,21,0"
+                       Padding="0"
+                       VerticalAlignment="Center"/>
+                <TextBox x:Name="LastNameTextBox" 
+                         Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                         Style="{StaticResource textBoxError}">
+                    <TextBox.Text>
+                        <Binding Path="PersonV.Lastname" 
+                                 UpdateSourceTrigger="PropertyChanged" 
+                                 ValidatesOnDataErrors="True" 
+                                 ValidatesOnExceptions="True"/>
+                    </TextBox.Text>
+                </TextBox>
+            </DockPanel>
+            <DockPanel Margin="5" Height="20">
+                <Label x:Name="EmailLabel" 
+                       Content="Email" 
+                       FontSize="12" 
+                       Margin="15,0,46,0"
+                       Padding="0"
+                       VerticalAlignment="Center"/>
+                <TextBox x:Name="EmailTextBox" 
+                         Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                         Style="{StaticResource textBoxError}">
+                    <TextBox.Text>
+                        <Binding Path="PersonV.Email" 
+                                 UpdateSourceTrigger="PropertyChanged" 
+                                 ValidatesOnDataErrors="True" 
+                                 ValidatesOnExceptions="True"/>
+                    </TextBox.Text>
+                </TextBox>
+            </DockPanel>
+            <DockPanel Margin="5" Height="20">
+                <Label x:Name="PasswordLabel" 
+                       Content="Password" 
+                       FontSize="12"
+                       Margin="15,0,25,0"
+                       Padding="0"
+                       VerticalAlignment="Center"/>
+                <TextBox x:Name="PasswrdTextBox" 
+                         Validation.ErrorTemplate="{StaticResource validationTemplate}"
+                         Style="{StaticResource textBoxError}">
+                    <TextBox.Text>
+                        <Binding Path="PersonV.Password" 
+                                 UpdateSourceTrigger="PropertyChanged" 
+                                 ValidatesOnDataErrors="True" 
+                                 ValidatesOnExceptions="True"/>
+                    </TextBox.Text>
+                </TextBox>
+            </DockPanel>
+            <DockPanel Margin="5" Height="20">
+                <Label x:Name="StatusLabel" 
+                       Content="Status" 
+                       FontSize="12" 
+                       Margin="15,0,44,0"
+                       Padding="0"
+                       VerticalAlignment="Center"/>
+                <TextBox x:Name="StatusTextBox"
+                         IsReadOnly="True">
+                    <TextBox.Text>
+                        <Binding Path="PersonV.Status"/>
+                    </TextBox.Text>
+                </TextBox>
+            </DockPanel>
+            <Button x:Name="SaveButton" 
+                    Style="{StaticResource roundButton}" 
+                    Content="Save" 
+                    FontSize="20"
+                    HorizontalAlignment="Center"
+                    Margin="0,10,0,10"
+                    Command="{Binding saveCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

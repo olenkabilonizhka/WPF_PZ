@@ -1,0 +1,104 @@
+﻿<Window x:Class="AdminWPF.StartPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        WindowStyle="None" 
+        Height="350" Width="700" 
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="12*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="ExitButton" 
+                Style="{StaticResource exitButton}" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Stretch" 
+                Grid.Row="0"
+                Command="{Binding logoutCommand}" 
+                Margin="0,0,3,25" 
+                Grid.RowSpan="2"
+                Content="Log out"/>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" >
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource navigateButton}"/>
+            </StackPanel.Resources>
+            <Button x:Name="ActivateButton" 
+                    Content="Activate"
+                    Command="{Binding activateCommand}"/>
+            <Button Name="BlockButton" 
+                    Content="Block"
+                    Command="{Binding blockCommand}"/>
+            <Button Name="AddButton" 
+                    Content="Add"
+                    Command="{Binding addCommand}"/>
+            <Button Name="DeleteButton" 
+                    Content="Delete"
+                    Command="{Binding deleteCommand}"/>
+            <Button Name="InfoButton" 
+                    Content="Info"
+                    Command="{Binding showPersonInfoCommand}"/>
+            <Button Name="SortButton"
+                    Content="Sort by name"
+                    Command="{Binding sortUsersCommand}"/>
+            <Button Name="UsersButton"
+                    Content="Users"
+                    Command="{Binding getUsersCommand}"/>
+            <Label x:Name="SearchLabel" 
+                   Content="Search: " 
+                   Margin="15,0,0,0"/>
+            <TextBox x:Name="FindTextBox"
+                     Width="150">
+                <TextBox.Text>
+                    <Binding Path="SearchPerson" 
+                             UpdateSourceTrigger="PropertyChanged"/>
+                </TextBox.Text>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding searchCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+        </StackPanel>
+        
+        <ListView  x:Name="UsersList" 
+                 Grid.Row="2"
+                 Margin="5"
+                 ItemsSource = "{Binding Users}"
+                 SelectedItem = "{Binding Person}"
+                 SelectionMode="Single">
+            <ListView.Resources>
+                <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="PersonId" Width="80" DisplayMemberBinding="{Binding PersonId}"/>
+                    <GridViewColumn Header="First name" Width="150" DisplayMemberBinding="{Binding Firstname}"/>
+                    <GridViewColumn Header="Last name" Width="150" DisplayMemberBinding="{Binding Lastname}"/>
+                    <GridViewColumn Header="Email" Width="210" DisplayMemberBinding="{Binding Email}"/>
+                    <GridViewColumn Header="Active" Width="90" DisplayMemberBinding="{Binding Status}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
